@@ -1,6 +1,6 @@
 - id: '1583552499746'
   alias: Living Room Lights - On
-  description: Turn living room lights on when lx level drops below threshold.
+  description: Turn living room lights on at sunset.
   trigger:
   - event: sunset
     platform: sun
@@ -9,7 +9,10 @@
     before: '23:00:00'
     condition: time
   action:
-  - scene: scene.livingroomlights_on
+  - data:
+      group_name: Living Room
+      scene_name: Concentrate
+    service: hue.hue_activate_scene
 - id: '1583614877368'
   alias: Garage Light On
   description: Turn lights on when garage door open
