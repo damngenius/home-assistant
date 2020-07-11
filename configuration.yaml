@@ -15,29 +15,15 @@ homeassistant:
 
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
-
-mobile_app:
-
 ios:
-
-frontend:
-  #themes: !include themes/themes.yaml
-  themes: !include themes/ios-dark-mode.yaml
-  #javascript_version: latest
 
 # menubar stuff
 hassio:
 
-config:
+# discovery service
+discovery:
 
-history:
-
-logbook:
-
-map:
-
-discovery: false
-
+# Outdoor lighst group
 light:
   - platform: group
     name: Outdoor Lights
@@ -45,17 +31,18 @@ light:
       - light.tasmota_frontyard
       - light.tasmota_BackYard
 
+# weather integration
 weather:
   - platform: environment_canada
     forecast: hourly
 
+# Google Nest integration
 nest:
   client_id: !secret nest_client_id
   client_secret: !secret nest_client_secret
 
-# Sensors
+# host sensors
 sensor:
-  # System Monitor
   - platform: systemmonitor
     resources:
       - type: processor_use
@@ -65,7 +52,7 @@ sensor:
       - type: swap_use_percent
       - type: last_boot
 
-# Track status of mobile devices
+# device tracker UniFi
 device_tracker: !include device_tracker.yaml
 
 # Scenes
@@ -78,7 +65,7 @@ cover:
     password: !secret myq_password
     type: liftmaster
 
-# Example configuration.yaml entry
+# outdoor cameras
 camera:
   - platform: mjpeg
     mjpeg_url: http://192.168.77.13:8081
@@ -102,6 +89,7 @@ speedtestdotnet:
 # System Health
 system_health:
 
+# HA includes
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
