@@ -1,0 +1,79 @@
+- id: '1583552499746'
+  alias: Living Room Lights - On
+  description: Turn living room lights on when lx level drops below threshold.
+  trigger:
+  - event: sunset
+    platform: sun
+  condition:
+  - after: '20:00:00'
+    before: '23:00:00'
+    condition: time
+  action:
+  - scene: scene.livingroomlights_on
+- id: '1583614877368'
+  alias: Garage Light On
+  description: Turn lights on when garage door open
+  trigger:
+  - entity_id: cover.garage_door
+    platform: state
+    to: open
+  condition:
+  - after: sunset
+    after_offset: -00:30:00
+    before: sunrise
+    condition: sun
+  action:
+  - scene: scene.garage_light_on
+- id: '1583614954065'
+  alias: Garage Light Off
+  description: Turn lights off when Garage door closed
+  trigger:
+  - entity_id: cover.garage_door
+    platform: state
+    to: closed
+  condition: []
+  action:
+  - scene: scene.garage_light_off
+- action:
+  - scene: scene.livingroomlights_off
+  alias: Living Room Lights - Off
+  condition: []
+  description: ''
+  id: '1584893464573'
+  trigger:
+  - at: '23:30'
+    platform: time
+- id: '1587261294860'
+  alias: Close Garage Door when Alarm Home
+  description: ''
+  trigger:
+  - entity_id: alarm_control_panel.ring_alarm
+    platform: state
+    to: armed_home,armed_away
+  condition:
+  - condition: state
+    entity_id: cover.garage_door
+    state: open
+  action:
+  - data: {}
+    entity_id: cover.garage_door
+    service: cover.close_cover
+- id: '1593321973249'
+  alias: Outside Lights On
+  description: ''
+  trigger:
+  - event: sunset
+    offset: 00:05:00
+    platform: sun
+  condition: []
+  action:
+  - scene: scene.outside_lights_on
+- id: '1593322044102'
+  alias: Outside Lights Off
+  description: ''
+  trigger:
+  - at: '1:30'
+    platform: time
+  condition: []
+  action:
+  - scene: scene.outside_lights_off

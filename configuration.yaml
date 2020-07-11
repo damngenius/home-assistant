@@ -1,0 +1,107 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: 43.6403
+  longitude: -79.3711
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 181
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: America/Toronto
+  # Customization file
+  customize: !include customize.yaml
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+mobile_app:
+
+ios:
+
+frontend:
+  #themes: !include themes/themes.yaml
+  themes: !include themes/ios-dark-mode.yaml
+  #javascript_version: latest
+
+# menubar stuff
+hassio:
+
+config:
+
+history:
+
+logbook:
+
+map:
+
+discovery: false
+
+light:
+  - platform: group
+    name: Outdoor Lights
+    entities:
+      - light.tasmota_frontyard
+      - light.tasmota_BackYard
+
+weather:
+  - platform: environment_canada
+    forecast: hourly
+
+nest:
+  client_id: !secret nest_client_id
+  client_secret: !secret nest_client_secret
+
+# Sensors
+sensor:
+  # System Monitor
+  - platform: systemmonitor
+    resources:
+      - type: processor_use
+      - type: disk_use_percent
+        arg: /
+      - type: memory_use_percent
+      - type: swap_use_percent
+      - type: last_boot
+
+# Track status of mobile devices
+device_tracker: !include device_tracker.yaml
+
+# Scenes
+scene: !include scenes.yaml
+
+# MyQ garage door
+cover:
+  - platform: myq
+    username: !secret myq_user
+    password: !secret myq_password
+    type: liftmaster
+
+# Example configuration.yaml entry
+camera:
+  - platform: mjpeg
+    mjpeg_url: http://192.168.77.13:8081
+    still_image_url: http://192.168.77.13:8765/picture/1/current/?_username=admin&_signature=6e23571cb117c2484f18a7efeb019db966596ee8
+    name: Backyard
+    authentication: basic
+    username: !secret backyard_camera_user
+    password: !secret backyard_camera_password
+
+  - platform: mjpeg
+    mjpeg_url: http://192.168.77.13:8082
+    still_image_url: http://192.168.77.13:8765/picture/2/current/?_username=admin&_signature=0aef9442123645170c44412e9a746aa4eaa01a8e
+    name: Garage
+    authentication: basic
+    username: !secret garage_camera_user
+    password: !secret garage_camera_password
+
+# Speedtest
+speedtestdotnet:
+
+# System Health
+system_health:
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
