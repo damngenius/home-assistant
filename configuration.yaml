@@ -46,20 +46,24 @@ cover:
 # outdoor cameras
 camera:
   - platform: mjpeg
-    mjpeg_url: http://192.168.77.13:8081
-    still_image_url: http://192.168.77.13:8765/picture/1/current/?_username=admin&_signature=6e23571cb117c2484f18a7efeb019db966596ee8
+    mjpeg_url: !secret backyard_mjpeg_url
+    still_image_url: !secret backyard_still_image_url
     name: Backyard
     authentication: basic
     username: !secret backyard_camera_user
     password: !secret backyard_camera_password
 
   - platform: mjpeg
-    mjpeg_url: http://192.168.77.13:8082
-    still_image_url: http://192.168.77.13:8765/picture/2/current/?_username=admin&_signature=0aef9442123645170c44412e9a746aa4eaa01a8e
+    mjpeg_url: !secret garage_mjpeg_url
+    still_image_url: !secret garage_still_image_url
     name: Garage
     authentication: basic
     username: !secret garage_camera_user
     password: !secret garage_camera_password
+
+# Pi-Hole
+pi_hole:
+  - host: !secret pihole_host
 
 # Speedtest
 speedtestdotnet:
