@@ -1,0 +1,6 @@
+# Outdoor lights
+- platform: group
+  name: Outdoor Lights
+  entities:
+    - light.tasmota_frontyard
+    - light.tasmota_BackYard
