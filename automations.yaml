@@ -1,18 +1,17 @@
 - id: '1583552499746'
   alias: Living Room Lights - On
-  description: Turn living room lights on at sunset.
+  description: Turn living room lights on.
   trigger:
-  - event: sunset
-    platform: sun
+  - platform: template
+    value_template: '{{ states.sensor.hue_motion_sensor_1_light_level.attributes.lightlevel  |
+      int < 18000 }}'
   condition:
-  - after: '20:00:00'
-    before: '23:00:00'
+  - after: '18:00:00'
     condition: time
   action:
-  - data:
-      group_name: Living Room
-      scene_name: Concentrate
-    service: hue.hue_activate_scene
+  - data: {}
+    service: script.transition_living_room_lights_on
+  mode: single
 - id: '1583614877368'
   alias: Garage Light On
   description: Turn lights on when garage door open
@@ -21,12 +20,11 @@
     platform: state
     to: open
   condition:
-  - after: sunset
-    after_offset: -00:30:00
-    before: sunrise
-    condition: sun
+  - after: '20:00:00'
+    condition: time
   action:
   - scene: scene.garage_light_on
+  mode: single
 - id: '1583614954065'
   alias: Garage Light Off
   description: Turn lights off when Garage door closed
@@ -34,9 +32,13 @@
   - entity_id: cover.garage_door
     platform: state
     to: closed
-  condition: []
+  condition:
+  - condition: state
+    entity_id: light.garage
+    state: 'on'
   action:
   - scene: scene.garage_light_off
+  mode: single
 - action:
   - scene: scene.livingroomlights_off
   alias: Living Room Lights - Off
@@ -47,12 +49,15 @@
   - at: '23:30'
     platform: time
 - id: '1587261294860'
-  alias: Close Garage Door when Alarm Home
-  description: ''
+  alias: Close Garage Door
+  description: Close garage door when alarm set to home or away
   trigger:
-  - entity_id: alarm_control_panel.ring_alarm
-    platform: state
-    to: armed_home,armed_away
+  - platform: template
+    value_template: '{{ is_state(''alarm_control_panel.ring_alarm'', ''armed_home'')
+      }}'
+  - platform: template
+    value_template: '{{ is_state(''alarm_control_panel.ring_alarm'', ''armed_away'')
+      }}'
   condition:
   - condition: state
     entity_id: cover.garage_door
@@ -61,22 +66,26 @@
   - data: {}
     entity_id: cover.garage_door
     service: cover.close_cover
+  mode: single
 - id: '1593321973249'
   alias: Outside Lights On
   description: ''
   trigger:
-  - event: sunset
-    offset: 00:05:00
-    platform: sun
+  - platform: template
+    value_template: '{{ states.sun.sun.attributes.elevation  | int < 0 }}'
   condition: []
   action:
   - scene: scene.outside_lights_on
-- id: '1593322044102'
-  alias: Outside Lights Off
-  description: ''
+  mode: single
+- id: '1596602195449'
+  alias: Outside lights off
+  description: Turn outside lights off when alarm is set to home
   trigger:
-  - at: '1:30'
-    platform: time
+  - platform: template
+    value_template: '{{ is_state(''alarm_control_panel.ring_alarm'', ''armed_home'')
+      }}'
   condition: []
   action:
+  - delay: 00:15:00
   - scene: scene.outside_lights_off
+  mode: single
