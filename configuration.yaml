@@ -5,13 +5,24 @@ homeassistant:
   latitude: 43.6403
   longitude: -79.3711
   # Impacts weather/sunrise data (altitude above sea level in meters)
-  elevation: 181
+  #elevation: 181
   # metric for Metric, imperial for Imperial
   unit_system: metric
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: America/Toronto
+  # Duck DNS & Let's Encrypt
+  internal_url: "http://192.168.77.13:8123"
+  external_url: "https://q93jp6b.duckdns.org:8123"
   # Customization file
   customize: !include customize.yaml
+
+#logger:
+#  default: error
+#  logs:
+#    homeassistant.components.automation: debug
+#    homeassistant.components.script: debug
+#    homeassistant.core: debug
+#    homeassistant.helpers.script: debug
 
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
