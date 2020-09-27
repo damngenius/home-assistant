@@ -1,0 +1,35 @@
+transition_living_room_lights_on:
+  alias: Transition Living Room Lights On
+  mode: single
+  sequence:
+  - data:
+      profile: energize
+      transition: 600
+    entity_id: light.hue_color_lamp_1
+    service: light.turn_on
+  - data:
+      profile: energize
+      transition: 600
+    entity_id: light.hue_color_lamp_2
+    service: light.turn_on
+  - data:
+      brightness_pct: 75
+      transition: 900
+    entity_id: light.front_door
+    service: light.turn_on
+transition_living_room_lights_off:
+  alias: Transition Living Room Lights Off
+  mode: single
+  sequence:
+  - data:
+      transition: 600
+    entity_id: light.hue_color_lamp_1
+    service: light.turn_off
+  - data:
+      transition: 600
+    entity_id: light.hue_color_lamp_2
+    service: light.turn_off
+  - data:
+      transition: 600
+    entity_id: light.front_door
+    service: light.turn_off
