@@ -4,9 +4,10 @@
   trigger:
   - platform: template
     value_template: '{{ states.sensor.hue_motion_sensor_1_light_level.attributes.lightlevel  |
-      int < 18000 }}'
+      int < 16000 }}'
   condition:
-  - after: '18:00:00'
+  - after: '17:30:00'
+    before: '23:00:00'
     condition: time
   action:
   - data: {}
@@ -39,15 +40,17 @@
   action:
   - scene: scene.garage_light_off
   mode: single
-- action:
-  - scene: scene.livingroomlights_off
+- id: '1584893464573'
   alias: Living Room Lights - Off
-  condition: []
   description: ''
-  id: '1584893464573'
   trigger:
   - at: '23:30'
     platform: time
+  condition: []
+  action:
+  - data: {}
+    service: script.transition_living_room_lights_off
+  mode: single
 - id: '1587261294860'
   alias: Close Garage Door
   description: Close garage door when alarm set to home or away
