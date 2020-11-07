@@ -21,15 +21,87 @@ transition_living_room_lights_off:
   alias: Transition Living Room Lights Off
   mode: single
   sequence:
-  - data:
-      transition: 600
-    entity_id: light.hue_color_lamp_1
+  - entity_id: light.hue_color_lamp_1
     service: light.turn_off
-  - data:
+    data:
       transition: 600
-    entity_id: light.hue_color_lamp_2
+  - entity_id: light.hue_color_lamp_2
     service: light.turn_off
-  - data:
+    data:
       transition: 600
-    entity_id: light.front_door
+  - entity_id: light.hue_color_lamp_3
     service: light.turn_off
+    data:
+      transition: 600
+savanna_sunset:
+  alias: Savanna Sunset
+  sequence:
+  - service: hue.hue_activate_scene
+    data:
+      group_name: Living Room
+      scene_name: Savanna sunset
+  mode: single
+arctic_aurora:
+  alias: Arctic Aurora
+  sequence:
+  - service: hue.hue_activate_scene
+    data:
+      group_name: Living Room
+      scene_name: Arctic aurora
+  mode: single
+relax:
+  alias: Relax
+  sequence:
+  - service: hue.hue_activate_scene
+    data:
+      group_name: Living Room
+      scene_name: Relax
+  mode: single
+concentrate:
+  alias: Concentrate
+  sequence:
+  - service: hue.hue_activate_scene
+    data:
+      group_name: Living Room
+      scene_name: Concentrate
+  mode: single
+bright:
+  alias: Bright
+  sequence:
+  - service: hue.hue_activate_scene
+    data:
+      group_name: Living Room
+      scene_name: Bright
+  mode: single
+tropical_twilight:
+  alias: Tropical Twilight
+  sequence:
+  - service: hue.hue_activate_scene
+    data:
+      group_name: Living Room
+      scene_name: Tropical twilight
+  mode: single
+spring_blossom:
+  alias: Spring Blossom
+  sequence:
+  - service: hue.hue_activate_scene
+    data:
+      group_name: Living Room
+      scene_name: Spring blossom
+  mode: single
+read:
+  alias: Read
+  sequence:
+  - service: hue.hue_activate_scene
+    data:
+      group_name: Living Room
+      scene_name: Read
+  mode: single
+energize:
+  alias: Energize
+  sequence:
+  - service: hue.hue_activate_scene
+    data:
+      group_name: Living Room
+      scene_name: Energize
+  mode: single

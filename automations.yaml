@@ -4,15 +4,15 @@
   trigger:
   - platform: template
     value_template: '{{ states.sensor.hue_motion_sensor_1_light_level.attributes.lightlevel  |
-      int < 16000 }}'
+      int < 14000 }}'
   condition:
-  - after: '17:30:00'
-    before: '23:00:00'
-    condition: time
+  - condition: time
+    before: '23:30:00'
+    after: '16:00:00'
   action:
-  - data: {}
-    service: script.transition_living_room_lights_on
-  mode: single
+  - service: script.savanna_sunset
+    data: {}
+  mode: restart
 - id: '1583614877368'
   alias: Garage Light On
   description: Turn lights on when garage door open
@@ -21,11 +21,12 @@
     platform: state
     to: open
   condition:
-  - after: '20:00:00'
-    condition: time
+  - condition: sun
+    before: sunrise
+    after: sunset
   action:
   - scene: scene.garage_light_on
-  mode: single
+  mode: restart
 - id: '1583614954065'
   alias: Garage Light Off
   description: Turn lights off when Garage door closed
@@ -39,27 +40,24 @@
     state: 'on'
   action:
   - scene: scene.garage_light_off
-  mode: single
+  mode: restart
 - id: '1584893464573'
   alias: Living Room Lights - Off
   description: ''
   trigger:
-  - at: '23:30'
+  - at: '23:30:00'
     platform: time
   condition: []
   action:
   - data: {}
     service: script.transition_living_room_lights_off
-  mode: single
+  mode: restart
 - id: '1587261294860'
   alias: Close Garage Door
   description: Close garage door when alarm set to home or away
   trigger:
   - platform: template
     value_template: '{{ is_state(''alarm_control_panel.ring_alarm'', ''armed_home'')
-      }}'
-  - platform: template
-    value_template: '{{ is_state(''alarm_control_panel.ring_alarm'', ''armed_away'')
       }}'
   condition:
   - condition: state
@@ -76,10 +74,13 @@
   trigger:
   - platform: template
     value_template: '{{ states.sun.sun.attributes.elevation  | int < 0 }}'
-  condition: []
+  condition:
+  - condition: time
+    before: '21:00:00'
+    after: '17:00:00'
   action:
   - scene: scene.outside_lights_on
-  mode: single
+  mode: restart
 - id: '1596602195449'
   alias: Outside lights off
   description: Turn outside lights off when alarm is set to home
@@ -91,4 +92,7 @@
   action:
   - delay: 00:15:00
   - scene: scene.outside_lights_off
-  mode: single
+  - service: light.turn_off
+    data: {}
+    entity_id: light.hue_white_lamp_1
+  mode: restart

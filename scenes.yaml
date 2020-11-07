@@ -45,13 +45,13 @@
     light.tasmota_backyard:
       brightness: 255
       friendly_name: Tasmota BackYard
-      state: 'on'
       supported_features: 1
+      state: 'on'
     light.tasmota_frontyard:
       brightness: 255
       friendly_name: Tasmota frontyard
-      state: 'on'
       supported_features: 1
+      state: 'on'
 - id: '1593321899760'
   name: Outside Lights Off
   entities:

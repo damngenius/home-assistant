@@ -34,23 +34,11 @@ hassio:
 # discovery service
 discovery:
 
-# weather integration
-weather:
-  - platform: environment_canada
-    forecast: hourly
-
 # device tracker UniFi
 device_tracker: !include device_tracker.yaml
 
-# Badnest
-badnest:
-  issue_token: "https://accounts.google.com/o/oauth2/iframerpc?action=issueToken&response_type=token%20id_token&login_hint=AJDLj6LQu-SMCQLMJfOUep6S7tCedSlp5bjBRs-TG0HfXmfsYeGuXvAQYlIpj5yw86MrwmwcE2-t1gjWBomiWgNYEW-oDMH6Gw&client_id=733249279899-44tchle2kaa9afr5v9ov7jbuojfr9lrq.apps.googleusercontent.com&origin=https%3A%2F%2Fhome.nest.com&scope=openid%20profile%20email%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fnest-account&ss_domain=https%3A%2F%2Fhome.nest.com"
-  cookie: "__Secure-3PSID=1gfsRjH2JSeTSGKK0es2CRSPGeobm0z2LSqnUKI4IxBWm0ml5dY6bBIzv78SwO6m-bF8MA.; __Secure-3PAPISID=AbFHLilMiP8EWWKg/AofIQ9P5Ut4fncWou; NID=204=IIQjGB-RbeEtfldOu27bAEHq0eLrk8e62Op7Hk1DEWVucSKNfetZtVUHx0qymTcGYDQN43UjaS3jZXgAQoZ2cM9xV80MR7wDJfOtTSofBR5DBo6shwcLZzzFyUQTrQbr2fJeGWaAJpNftnD0yYHIVC7Yl-8IXjWBDXPUe7mh-0fVJZmFiUU2st016EooTEoelRWIdpBOxrA; __Host-3PLSID=s.CA|s.youtube:1gfsRgY_pmlvScYxkI98QIH14Wie3ozHKFFHe0wMa9qM_4uQBiIAOgF7fRKMlzWbIqusDg.; __Secure-3PSIDCC=AJi4QfGZIzAVplf47SBZcBJYRt3NiHIVc2Cr8RaDLBKwVQsQ7k7EtOE1Kj5sytxElcV8Qi-20A"
-  region: us
-
-climate:
-  - platform: badnest
-    scan_interval: 10
+# Stream
+stream:
 
 # MyQ garage door
 cover:
