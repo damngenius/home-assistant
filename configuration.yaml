@@ -28,6 +28,9 @@ homeassistant:
 default_config:
 ios:
 
+frontend:
+  themes: !include_dir_merge_named themes
+
 # menubar stuff
 hassio:
 
@@ -39,6 +42,14 @@ device_tracker: !include device_tracker.yaml
 
 # Stream
 stream:
+
+# Nest
+nest:
+  client_id: 430378820674-89fulmsvv1lgb8rl3rkbsumn7h0v01c3.apps.googleusercontent.com
+  client_secret: URkbQ-nfb9AoOjOda4uggrQW
+  project_id: 9f01af0f-aed8-4b59-bd71-4ebe37e62c75
+  subscriber_id: projects/deductive-cider-296321/subscriptions/KJFDYHKDM
+#  subscriber_service_account: !include kjfdyhkdm-1605994376539-909486d0780e.json
 
 # MyQ garage door
 cover:

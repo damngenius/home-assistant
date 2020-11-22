@@ -1,0 +1,7 @@
+# Xmas decorations
+xmas_lights:
+  name: Xmas Lights
+  entities:
+    - switch.switch1
+    - switch.switch2
+    - switch.tasmota

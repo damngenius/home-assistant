@@ -2,15 +2,15 @@
   alias: Living Room Lights - On
   description: Turn living room lights on.
   trigger:
-  - platform: template
+  - platform: sun
+    event: sunset
+    offset: -01:00:00
+  condition:
+  - condition: template
     value_template: '{{ states.sensor.hue_motion_sensor_1_light_level.attributes.lightlevel  |
       int < 14000 }}'
-  condition:
-  - condition: time
-    before: '23:30:00'
-    after: '16:00:00'
   action:
-  - service: script.savanna_sunset
+  - service: script.livingroomlights
     data: {}
   mode: restart
 - id: '1583614877368'
@@ -25,7 +25,10 @@
     before: sunrise
     after: sunset
   action:
-  - scene: scene.garage_light_on
+  - service: light.turn_on
+    data:
+      brightness: 255
+    entity_id: light.garage
   mode: restart
 - id: '1583614954065'
   alias: Garage Light Off
@@ -39,13 +42,16 @@
     entity_id: light.garage
     state: 'on'
   action:
-  - scene: scene.garage_light_off
+  - service: light.turn_off
+    data:
+      transition: 10
+    entity_id: light.garage
   mode: restart
 - id: '1584893464573'
   alias: Living Room Lights - Off
   description: ''
   trigger:
-  - at: '23:30:00'
+  - at: '23:00:00'
     platform: time
   condition: []
   action:
@@ -72,12 +78,10 @@
   alias: Outside Lights On
   description: ''
   trigger:
-  - platform: template
-    value_template: '{{ states.sun.sun.attributes.elevation  | int < 0 }}'
-  condition:
-  - condition: time
-    before: '21:00:00'
-    after: '17:00:00'
+  - platform: sun
+    event: sunset
+    offset: -00:10:00
+  condition: []
   action:
   - scene: scene.outside_lights_on
   mode: restart
@@ -96,3 +100,47 @@
     data: {}
     entity_id: light.hue_white_lamp_1
   mode: restart
+- id: '1604878126809'
+  alias: Bedroom Lamp - On
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunset
+  condition: []
+  action:
+  - service: script.bedroom
+    data: {}
+  mode: single
+- id: '1604878498749'
+  alias: Bedroom Lamp - Off
+  description: ''
+  trigger:
+  - platform: time
+    at: '23:30:00'
+  condition: []
+  action:
+  - service: light.turn_off
+    data:
+      transition: 5
+    entity_id: light.hue_color_lamp_4
+  mode: single
+- id: '1604879778228'
+  alias: Xmas Tree - Off
+  description: ''
+  trigger:
+  - platform: time
+    at: '23:30:00'
+  condition: []
+  action:
+  - scene: scene.xmas_lights_off
+  mode: single
+- id: '1604879928786'
+  alias: Xmas Lights - On
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunset
+  condition: []
+  action:
+  - scene: scene.xmas_lights_on
+  mode: single
