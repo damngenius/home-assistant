@@ -5,3 +5,17 @@ xmas_lights:
     - switch.switch1
     - switch.switch2
     - switch.tasmota
+
+# Outdoor lights
+outdoor_lights:
+  name: Outdoor Lights
+  entities:
+    - light.tasmota_backyard
+    - light.tasmota_frontyard
+
+# Basement lights
+basement_lights:
+  name: Basement Lights
+  entities:
+    - switch.basement1
+    - switch.basement2

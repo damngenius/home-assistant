@@ -11,8 +11,8 @@ homeassistant:
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: America/Toronto
   # Duck DNS & Let's Encrypt
-  internal_url: "http://192.168.77.13:8123"
-  external_url: "http://q93jp6b.duckdns.org:8123"
+  internal_url: !secret internal_url
+  external_url: !secret external_url
   # Customization file
   customize: !include customize.yaml
 
@@ -36,6 +36,8 @@ hassio:
 
 # discovery service
 discovery:
+  ignore:
+    - apple_tv
 
 # device tracker UniFi
 device_tracker: !include device_tracker.yaml
@@ -45,11 +47,10 @@ stream:
 
 # Nest
 nest:
-  client_id: 430378820674-89fulmsvv1lgb8rl3rkbsumn7h0v01c3.apps.googleusercontent.com
-  client_secret: URkbQ-nfb9AoOjOda4uggrQW
-  project_id: 9f01af0f-aed8-4b59-bd71-4ebe37e62c75
-  subscriber_id: projects/deductive-cider-296321/subscriptions/KJFDYHKDM
-#  subscriber_service_account: !include kjfdyhkdm-1605994376539-909486d0780e.json
+  client_id: !secret client_id
+  client_secret: !secret client_secret
+  project_id: !secret project_id
+  subscriber_id: !secret subscriber_id
 
 # MyQ garage door
 cover:

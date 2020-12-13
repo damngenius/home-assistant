@@ -99,6 +99,6 @@ livingroomlights:
   sequence:
   - service: hue.hue_activate_scene
     data:
-      group_name: Living Room
+      group_name: LivingRoom
       scene_name: Read
   mode: single

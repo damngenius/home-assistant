@@ -46,3 +46,103 @@
     switch.tasmota:
       friendly_name: plug1
       state: 'off'
+- id: '1607138302643'
+  name: Goodnight
+  entities:
+    light.hue_color_lamp_1:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - colorloop
+      - random
+      brightness: 255
+      hs_color:
+      - 38.88
+      - 49.02
+      rgb_color:
+      - 255
+      - 210
+      - 129
+      xy_color:
+      - 0.447
+      - 0.406
+      effect: none
+      friendly_name: Hue color Lamp 1
+      supported_features: 63
+      state: 'on'
+    light.hue_color_lamp_2:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - colorloop
+      - random
+      brightness: 255
+      hs_color:
+      - 38.88
+      - 49.02
+      rgb_color:
+      - 255
+      - 210
+      - 129
+      xy_color:
+      - 0.447
+      - 0.406
+      effect: none
+      friendly_name: Hue color Lamp 2
+      supported_features: 63
+      state: 'on'
+    light.hue_color_lamp_3:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Hue color Lamp 3
+      supported_features: 63
+      state: 'off'
+    light.hue_color_lamp_4:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - colorloop
+      - random
+      brightness: 114
+      hs_color:
+      - 36.568
+      - 66.275
+      rgb_color:
+      - 255
+      - 188
+      - 85
+      xy_color:
+      - 0.502
+      - 0.414
+      effect: none
+      friendly_name: Bedroom Lamp
+      supported_features: 63
+      state: 'on'
+    light.hue_white_lamp_1:
+      friendly_name: Garage
+      supported_features: 41
+      state: 'off'
+    switch.basement1:
+      friendly_name: Basement1
+      state: 'off'
+    switch.basement2:
+      friendly_name: basement2
+      state: 'off'
+    cover.garage_door:
+      friendly_name: Garage Door
+      supported_features: 3
+      device_class: garage
+      state: closed
+    alarm_control_panel.ring_alarm:
+      code_format:
+      changed_by:
+      code_arm_required: true
+      friendly_name: House Alarm
+      supported_features: 23
+      state: disarmed
+    switch.north_york_siren:
+      friendly_name: North York Siren
+      state: 'off'
