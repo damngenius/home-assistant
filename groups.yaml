@@ -1,11 +1,3 @@
-# Xmas decorations
-xmas_lights:
-  name: Xmas Lights
-  entities:
-    - switch.switch1
-    - switch.switch2
-    - switch.tasmota
-
 # Outdoor lights
 outdoor_lights:
   name: Outdoor Lights
@@ -17,5 +9,5 @@ outdoor_lights:
 basement_lights:
   name: Basement Lights
   entities:
-    - switch.basement1
-    - switch.basement2
+    - light.basement1
+    - light.basement2
