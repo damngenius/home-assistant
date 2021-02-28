@@ -22,30 +22,6 @@
       friendly_name: Tasmota frontyard
       state: 'off'
       supported_features: 1
-- id: '1604880990514'
-  name: Xmas Lights - On
-  entities:
-    switch.switch1:
-      friendly_name: Switch1
-      state: 'on'
-    switch.switch2:
-      friendly_name: Switch2
-      state: 'on'
-    switch.tasmota:
-      friendly_name: plug1
-      state: 'on'
-- id: '1604881081133'
-  name: Xmas Lights - Off
-  entities:
-    switch.switch1:
-      friendly_name: Switch1
-      state: 'off'
-    switch.switch2:
-      friendly_name: Switch2
-      state: 'off'
-    switch.tasmota:
-      friendly_name: plug1
-      state: 'off'
 - id: '1607138302643'
   name: Goodnight
   entities:
