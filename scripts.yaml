@@ -2,18 +2,13 @@ transition_living_room_lights_off:
   alias: Transition Living Room Lights Off
   mode: single
   sequence:
-  - entity_id: light.hue_color_lamp_1
-    service: light.turn_off
+  - service: light.turn_off
     data:
       transition: 600
-  - entity_id: light.hue_color_lamp_2
-    service: light.turn_off
-    data:
-      transition: 600
-  - entity_id: light.hue_color_lamp_3
-    service: light.turn_off
-    data:
-      transition: 600
+    entity_id: light.livingroom
+  - service: switch.turn_off
+    data: {}
+    entity_id: switch.switch1
 savanna_sunset:
   alias: Savanna Sunset
   sequence:
@@ -100,5 +95,5 @@ livingroomlights:
   - service: hue.hue_activate_scene
     data:
       group_name: LivingRoom
-      scene_name: Read
+      scene_name: Savanna sunset
   mode: single
