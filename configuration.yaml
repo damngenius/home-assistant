@@ -16,13 +16,10 @@ homeassistant:
   # Customization file
   customize: !include customize.yaml
 
-#logger:
-#  default: error
-#  logs:
-#    homeassistant.components.automation: debug
-#    homeassistant.components.script: debug
-#    homeassistant.core: debug
-#    homeassistant.helpers.script: debug
+http:
+  server_port: 8123
+  ssl_certificate: /ssl/fullchain.pem
+  ssl_key: /ssl/privkey.pem
 
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
@@ -34,15 +31,7 @@ frontend:
 # menubar stuff
 hassio:
 
-# discovery service
-discovery:
-  ignore:
-    - apple_tv
-
-# device tracker UniFi
-device_tracker: !include device_tracker.yaml
-
-# Stream
+  # Stream
 stream:
 
 # Nest
@@ -51,13 +40,6 @@ nest:
   client_secret: !secret client_secret
   project_id: !secret project_id
   subscriber_id: !secret subscriber_id
-
-# MyQ garage door
-cover:
-  - platform: myq
-    username: !secret myq_user
-    password: !secret myq_password
-    type: liftmaster
 
 # outdoor cameras
 camera:
@@ -77,13 +59,10 @@ camera:
     username: !secret garage_camera_user
     password: !secret garage_camera_password
 
-# Speedtest
-speedtestdotnet:
-
 # System Health
 system_health:
 
-# HA includes
+# Includes
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
