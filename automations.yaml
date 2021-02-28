@@ -2,13 +2,13 @@
   alias: Living Room Lights - On
   description: Turn living room lights on.
   trigger:
-  - platform: sun
-    event: sunset
-    offset: -02:00:00
-  condition:
-  - condition: numeric_state
+  - platform: numeric_state
     entity_id: sensor.living_room_light_level
-    below: '14000'
+    below: '13000'
+  condition:
+  - condition: sun
+    after: sunset
+    after_offset: -01:30:00
   action:
   - service: script.livingroomlights
     data: {}
@@ -59,9 +59,9 @@
   alias: Close Garage Door
   description: Close garage door when alarm set to home or away
   trigger:
-  - platform: template
-    value_template: '{{ is_state(''alarm_control_panel.ring_alarm'', ''armed_home'')
-      }}'
+  - platform: state
+    entity_id: alarm_control_panel.ring_alarm
+    to: armed_home
   condition:
   - condition: state
     entity_id: cover.garage_door
@@ -70,14 +70,14 @@
   - data: {}
     entity_id: cover.garage_door
     service: cover.close_cover
-  mode: single
+  mode: restart
 - id: '1593321973249'
   alias: Outside Lights On
   description: ''
   trigger:
   - platform: sun
     event: sunset
-    offset: -00:10:00
+    offset: 00:15:00
   condition: []
   action:
   - service: light.turn_on
@@ -114,7 +114,7 @@
   description: ''
   trigger:
   - platform: time
-    at: '23:59:00'
+    at: 01:00:00
   condition: []
   action:
   - service: light.turn_off
@@ -122,23 +122,31 @@
       transition: 5
     entity_id: light.hue_color_lamp_4
   mode: single
-- id: '1604879778228'
-  alias: Xmas Tree - Off
-  description: ''
+- id: '1609195530820'
+  alias: Living room lights off after 10 minutes
+  description: Turn off living room lights off 10 minutes after last movement if on
+    after 11pm.
   trigger:
-  - platform: time
-    at: '23:30:00'
-  condition: []
+  - platform: state
+    entity_id: binary_sensor.hue_motion_sensor_1_motion
+    to: 'off'
+    for: 00:10:00
+  condition:
+  - condition: time
+    after: '23:30'
   action:
-  - scene: scene.xmas_lights_off
-  mode: single
-- id: '1604879928786'
-  alias: Xmas Lights - On
+  - service: script.transition_living_room_lights_off
+    data: {}
+  mode: restart
+- id: '1611716087928'
+  alias: Bar Lights On
   description: ''
   trigger:
   - platform: sun
     event: sunset
   condition: []
   action:
-  - scene: scene.xmas_lights_on
-  mode: single
+  - service: switch.turn_on
+    data: {}
+    entity_id: switch.switch1
+  mode: restart
